@@ -2,7 +2,7 @@
 FROM ubuntu:latest
 
 # Install necessary packages
-RUN apt-get update && aapt install cowsay fortune -y
+RUN apt-get update && apt-get install -y cowsay fortune
 
 # Copy the script into the container
 COPY wisecow.sh /app/wisecow.sh
