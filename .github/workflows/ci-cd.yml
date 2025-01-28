@@ -23,16 +23,9 @@ jobs:
       - name: Login to Amazon ECR
         id: login-of-aws-ecr
         uses: aws-actions/amazon-ecr-login@v1
+      
       - name: Build and push Docker image
         env:
           ECR_REGISTRY: ${{ steps.login-pf-aws-ecr.outputs.registry }}
           ECR_REPOSITORY: ${{secrets.REPO_NAME}}
           IMAGE_TAG: ${{ github.sha }}
-
-#      - name: Trivy Scan
-#        run: |
-#          trivy image --exit-code 1 --severity HIGH,CRITICAL <aws_account_id>.dkr.ecr.<region>.amazonaws.com/wisecowapp980:latest
-
-#      - name: Clean up old images
-#        run: |
-#          aws ecr list-images --repository-name my-app-repo --query 'imageIds[?imageTag!=`latest`]' --output json | jq -r '.[] | select(.imageTag | test("^[0-9]+$")) | .imageTag' | sort -r | tail -n +4 | xargs -I {} aws ecr batch-delete-image --repository-name my-app-repo --image-ids imageTag={}
