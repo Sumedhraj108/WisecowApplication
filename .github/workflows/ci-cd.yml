@@ -26,15 +26,13 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
       
       - name: Build and push Docker image
-      #  env:
-      #    ECR_REGISTRY: ${{ steps.login-pf-aws-ecr.outputs.registry }}
-      #    ECR_REPOSITORY: ${{secrets.REPO_NAME}}
-      #    IMAGE_TAG: ${{ github.sha }}
+        env:
+          ECR_REGISTRY: ${{ steps.login-pf-aws-ecr.outputs.registry }}
+          ECR_REPOSITORY: wisecowapp980
+          IMAGE_TAG: wisecowapp980
         run: |
-          aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 908027382352.dkr.ecr.ap-south-1.amazonaws.com
-          docker build -t wisecowapp980 ..
-          docker tag wisecowapp980:latest 908027382352.dkr.ecr.ap-south-1.amazonaws.com/wisecowapp980:latest
-          docker push 908027382352.dkr.ecr.ap-south-1.amazonaws.com/wisecowapp980:latest
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
       # Download and install Trivy
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@0.28.0    # Scan the Docker image
