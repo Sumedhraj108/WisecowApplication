@@ -14,7 +14,7 @@ WORKDIR /app
 RUN chmod +x wisecow.sh
 
 # Expose the server port
-EXPOSE 4499
+EXPOSE 3415
 
 # Set the startup command
 CMD ["./wisecow.sh"]
