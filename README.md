@@ -22,7 +22,7 @@ This repository provides a Docker image for running MyFirstApp.
 
 2. Access the application:
 
-Once the container is running, you can access the application by opening a web browser and navigating to ** http://localhost:4499 **.
+Once the container is running, you can access the application by opening a web browser and navigating to ** http://localhost:3415 **.
 
 3. Stop the container:
 
