@@ -38,5 +38,6 @@ jobs:
           docker buildx inspect
           docker buildx create --name appbuilder --driver docker-container --platform linux/amd64
           docker buildx use appbuilder
-          docker buildx build --platform linux/amd64 -t my-image .
+          docker buildx build --platform linux/amd64,linux/arm64 -t my-image -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --push .
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+          
