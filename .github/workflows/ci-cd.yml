@@ -40,3 +40,7 @@ jobs:
           docker buildx use appbuilder
           docker buildx build --platform linux/amd64 -t my-image .
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+          aws ecr get-login-password --region your-region | docker login --username AWS --password-stdin $ECR_REGISTRY
+          docker tag my-image:latest $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          
